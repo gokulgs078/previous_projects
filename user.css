@@ -1,0 +1,33 @@
+.container1{
+    display:grid;
+    /* grid-template-columns: repeat(2,1fr); */
+    border:1px solid black;
+    padding: 20px;
+    /* margin-left: 40%; */
+    /* gap:20px; */
+    width:600px;
+    justify-content: center;
+    margin-left: 25%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width:fit-content;
+    gap: 20px;
+
+}
+
+#emailid{
+    /* padding:20px; */
+    margin-left: 35px;
+}
+
+#mobileno{
+    margin-left: 20px;
+}
+
+.button{
+    margin-left: 460px;
+}

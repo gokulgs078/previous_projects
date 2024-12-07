@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display User Details</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1>
+        User Details
+    </h1>
+    <div class="user-details" id="user-details"></div>
+    <div class="user-details" id="email-details"></div>
+    
+    <script>
+        window.onload = function () {
+            const firstname = localStorage.getItem("firstname");
+            const lastname = localStorage.getItem("lastname");
+            const mobile = localStorage.getItem("mobile");
+            const gender = localStorage.getItem("gender");
+            const address = localStorage.getItem("address");
+            const languages = localStorage.getItem("language");
+
+            const userDetailsDiv = document.getElementById("user-details");
+
+            userDetailsDiv.innerHTML = `
+            <p><strong>First Name:</strong> ${firstname}</p>`;
+        };
+
+        function onClick() {
+            const email = localStorage.getItem("email");
+            const userDetailsDiv = document.getElementById("email-details");
+
+            userDetailsDiv.innerHTML = `
+            <p><strong>Email:</strong> ${email}</p>`;
+        }
+        
+    </script>
+    <div onclick="onClick()">Click me</div>
+</body>
+</html>

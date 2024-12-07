@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+    <link rel="stylesheet" href="user.css">
+</head>
+<body>
+    <form class="container1" onsubmit="saveToLocalStorage(event)">
+        <div class="container">
+            <!-- First row -->
+            <div class="row">
+                <div>
+                    <label for="firstname">First Name: </label>
+                    <input type="text" id="firstname" maxlength="50">
+                </div>
+                <div>
+                    <label for="lastname">Last Name: </label>
+                    <input type="text" id="lastname" maxlength="50">
+                </div>
+            </div>
+            <!-- Second row -->
+            <div class="row">
+                <div>
+                    <label for="email">Email: </label>
+                    <input type="text" id="emailid">
+                </div>
+                <div>
+                    <label for="mobile">Mobile: </label>
+                    <!-- <input type="number" id="mobileno" min="1000000000" max="9999999999"> -->
+                    <input type="number" id="mobileno" oninput="limitInputLength(this,10)">
+                </div>
+            </div>
+            <!-- Third row -->
+            <div class="row">
+                <div>
+                    <label>Gender:</label>
+                    <input type="radio" name="gender" value="Male"> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                </div>
+            </div>
+            <!-- Fourth row -->
+            <div class="row">
+                <div>
+                    <label for="address">Address</label>
+                    <textarea id="address"></textarea>
+                </div>
+            </div>
+            <!-- Fifth row -->
+            <div class="row">
+                <div>
+                    <label>Languages Known:</label>
+                    <input type="checkbox" name="language" value="English"> English
+                    <input type="checkbox" name="language" value="Hindi"> Hindi
+                    <input type="checkbox" name="language" value="Malayalam"> Malayalam
+                </div>
+            </div>
+            <!-- Submit button row -->
+            <div class="row">
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function saveToLocalStorage(event) {
+            event.preventDefault();  // Prevent form from submitting
+    
+            const firstname = document.getElementById("firstname").value;
+            const lastname = document.getElementById("lastname").value;
+            const email = document.getElementById("emailid").value;
+            // Email validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                console.log("Invalid email address");
+                alert("Enter a valid emailid")
+                
+            }
+    
+            const mobile = document.getElementById("mobileno").value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value || "";
+            const address = document.getElementById("address").value;
+
+
+            // Collect selected languages
+            const languageCheckboxes = document.querySelectorAll('input[name="language"]:checked');
+            const languages = Array.from(languageCheckboxes).map(checkbox => checkbox.value).join(", ");
+    
+            // Save data to localStorage
+            localStorage.setItem("firstname", firstname);
+            localStorage.setItem("lastname", lastname);
+            localStorage.setItem("email", email);
+            localStorage.setItem("mobile", mobile);
+            localStorage.setItem("gender", gender);
+            localStorage.setItem("address", address);
+            localStorage.setItem("language", languages);
+    
+            // Redirect to display.html
+            window.location.href = "display.html";
+        }
+        function limitInputLength(element,maxLength)
+        {
+            if (element.value.length > maxLength) 
+            {
+                element.value = element.value.slice(0, maxLength);
+            }
+        }
+
+            
+        
+    </script>
+    
+</body>
+</html>
+
+
+
+<!-- Event Prevention: event.preventDefault() in saveToLocalStorage stops the default form submission, allowing JavaScript to handle it.
+Correct ID and Names for Inputs: Correct IDs are set for inputs, and the values are retrieved correctly.
+Checkbox and Radio Selection: Used JavaScript to retrieve selected radio button and checkboxes. -->
